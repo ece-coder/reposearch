@@ -89,6 +89,9 @@ public class RepoListAdapter extends RecyclerView.Adapter<RepoListAdapter.MyRepo
             holder.clickIssue.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
+                    Toast.makeText( mActivity.getApplicationContext(), "Clicked!",
+                            Toast.LENGTH_LONG).show();
                     Log.e("EXTRAS", "issues: " + repoDetails.get(position).numOpenIssues());
                     searchOpenIssues(repoDetails.get(position).fullName());
                 }
@@ -102,7 +105,6 @@ public class RepoListAdapter extends RecyclerView.Adapter<RepoListAdapter.MyRepo
     public MyRepoListAdapterViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.search_row, parent, false);
-
         return new MyRepoListAdapterViewHolder(itemView);
     }
 

@@ -26,6 +26,7 @@ public class IssueListFragment extends Fragment {
     @BindView(R.id.issue_list_view)
     RecyclerView issueListView;
 
+
     private IssueListAdapter mIssueListAdapter;
 
     public static List<IssueDetails> mIssueDetailslist;
@@ -52,11 +53,12 @@ public class IssueListFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mIssueListAdapter = new IssueListAdapter(mIssueDetailslist);
+        mIssueListAdapter = new IssueListAdapter(mIssueDetailslist, getActivity());
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         issueListView.setLayoutManager(mLayoutManager);
         issueListView.setAdapter(mIssueListAdapter);
 
 
     }
+
 }

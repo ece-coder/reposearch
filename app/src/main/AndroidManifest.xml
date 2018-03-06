@@ -20,6 +20,9 @@
         <activity
             android:name="com.example.jibriel.gitquery.IssueListActivity"
             android:label="@string/app_name" />
+        <activity
+            android:name="com.example.jibriel.gitquery.IssueDetailActivity"
+            android:label="@string/app_name" />
     </application>
 
 </manifest>

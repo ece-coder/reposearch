@@ -1,9 +1,14 @@
 package com.example.jibriel.gitquery;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.jibriel.gitquery.models.IssueDetails;
@@ -20,6 +25,7 @@ import butterknife.ButterKnife;
 public class IssueListAdapter extends RecyclerView.Adapter<IssueListAdapter.MyIssueListAdapterViewHolder> {
 
     private List<IssueDetails> issueDetails;
+    private Activity activity;
 
 
     public class MyIssueListAdapterViewHolder extends  RecyclerView.ViewHolder{
@@ -27,6 +33,9 @@ public class IssueListAdapter extends RecyclerView.Adapter<IssueListAdapter.MyIs
 
         @BindView(R.id.issueTitle)
         TextView issueTitle;
+
+        @BindView(R.id.issue_list_row)
+        LinearLayout issueListRow;
 
 
         public MyIssueListAdapterViewHolder (View view){
@@ -36,8 +45,9 @@ public class IssueListAdapter extends RecyclerView.Adapter<IssueListAdapter.MyIs
     }
 
 
-    public IssueListAdapter (List<IssueDetails> issueDetails){
+    public IssueListAdapter (List<IssueDetails> issueDetails, Activity activity){
         this.issueDetails = issueDetails;
+        this.activity = activity;
     }
 
     @Override
@@ -59,7 +69,7 @@ public class IssueListAdapter extends RecyclerView.Adapter<IssueListAdapter.MyIs
     }
 
     @Override
-    public void onBindViewHolder(MyIssueListAdapterViewHolder holder, int position) {
+    public void onBindViewHolder(MyIssueListAdapterViewHolder holder, final int position) {
 
         IssueDetails mIssueDetails = issueDetails.get(position);
 
@@ -68,6 +78,32 @@ public class IssueListAdapter extends RecyclerView.Adapter<IssueListAdapter.MyIs
         }else{
             holder.issueTitle.setText("[No Title]");
         }
+
+        holder.issueListRow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Bundle extras = new Bundle();
+                extras.putString("title", issueDetails.get(position).title());
+                extras.putString("url", issueDetails.get(position).url());
+                extras.putString("created_at", issueDetails.get(position).created());
+                extras.putString("updated_at", issueDetails.get(position).updated());
+                extras.putString("body", issueDetails.get(position).body());
+
+
+                openIssueDetailsPage(extras);
+
+                Log.e("EXTRAS", issueDetails.get(position).title());
+            }
+        });
+    }
+
+    private void openIssueDetailsPage (Bundle bundle){
+
+        Intent intent = new Intent(activity,IssueDetailActivity.class);
+        intent.putExtras(bundle);
+
+        activity.startActivity(intent);
 
     }
 }
