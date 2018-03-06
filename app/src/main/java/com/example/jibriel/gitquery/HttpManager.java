@@ -22,10 +22,11 @@ public interface HttpManager {
 
     String BASE_URL = "https://api.github.com/";
     //Sample API:
-    //https://api.github.com/search/issues?q=repo:twbs/bootstrap+is:closed
+    //https://api.github.com/search/issues?q=repo:twbs/bootstrap+is:open
+
 
     @GET("/search/issues")
-    Observable<Issues> searchIssues(@Query("q") String issues);
+    Observable<Issues> searchIssues(@Query(value = "q", encoded = true) String query);
 
 
     @GET("/search/repositories")
@@ -56,4 +57,5 @@ public interface HttpManager {
 
 
     }
+
 }

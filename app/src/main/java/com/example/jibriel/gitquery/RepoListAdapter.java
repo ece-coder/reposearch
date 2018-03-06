@@ -2,6 +2,7 @@ package com.example.jibriel.gitquery;
 
 import android.app.Activity;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -121,10 +122,7 @@ public class RepoListAdapter extends RecyclerView.Adapter<RepoListAdapter.MyRepo
     Subscription subscription;
     public void searchOpenIssues(String searchString){
 
-
-        //repo:twbs/bootstrap+is:closed
-        searchString = "repo:" + searchString;
-
+        searchString = "repo:" + searchString + "+is:open";
         subscription = mHttpmanager.searchIssues(searchString)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -155,7 +153,7 @@ public class RepoListAdapter extends RecyclerView.Adapter<RepoListAdapter.MyRepo
                 Log.e("EXTRAS", "DONE");
 
                 //RepoSearchFragment.mRepoDetailsList = response.repos();
-                viewSearchResults(response.issues());
+                viewOpenIssuesList(response.issues());
 
                 Toast.makeText( mActivity.getApplicationContext(), "Success!",
                         Toast.LENGTH_LONG).show();
@@ -166,18 +164,13 @@ public class RepoListAdapter extends RecyclerView.Adapter<RepoListAdapter.MyRepo
     }
 
 
-    private void viewSearchResults (List<IssueDetails> issueDetails) {
+    private void viewOpenIssuesList(List<IssueDetails> issueDetails){
 
-        IssueListFragment details = IssueListFragment.newInstance();
+        Intent intent = new Intent(mActivity, IssueListActivity.class);
         IssueListFragment.mIssueDetailslist = issueDetails;
 
-        // Execute a transaction, replacing any existing fragment
-        // with this one inside the frame.
-        FragmentTransaction ft = mActivity.getFragmentManager()
-                .beginTransaction();
-        ft.replace(R.id.fragFrame, details);
-        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-        ft.commit();
+        mActivity.startActivity(intent);
+
 
     }
 
