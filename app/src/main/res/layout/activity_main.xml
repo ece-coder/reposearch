@@ -6,13 +6,49 @@
     android:layout_height="match_parent"
     tools:context="com.example.jibriel.gitquery.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/searchTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="77dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="enter username"
+            tools:layout_editor_absoluteX="85dp"
+            tools:layout_editor_absoluteY="90dp" />
+
+        <Button
+            android:id="@+id/searchBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Search"
+            tools:layout_editor_absoluteX="85dp"
+            tools:layout_editor_absoluteY="186dp" />
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="40dp" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:id="@+id/fragFrame"
+        android:layout_height="wrap_content">
+
+
+    </FrameLayout>
+
+
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
