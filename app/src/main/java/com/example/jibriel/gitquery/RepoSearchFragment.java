@@ -31,9 +31,13 @@ public class RepoSearchFragment extends Fragment {
 
     public static List<RepoDetails> mRepoDetailsList;
 
+    private static HttpManager mHttpManager;
 
-    public static RepoSearchFragment newInstance() {
+
+    public static RepoSearchFragment newInstance(HttpManager httpManager) {
         RepoSearchFragment myFragment = new RepoSearchFragment();
+
+        mHttpManager = httpManager;
 
         return myFragment;
     }
@@ -53,7 +57,7 @@ public class RepoSearchFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mRepoListAdapter = new RepoListAdapter(mRepoDetailsList);
+        mRepoListAdapter = new RepoListAdapter(mRepoDetailsList, mHttpManager, getActivity());
         RecyclerView.LayoutManager mLayoutMnager = new LinearLayoutManager(getActivity().getApplicationContext());
         recyclerView.setLayoutManager(mLayoutMnager);
         recyclerView.setAdapter(mRepoListAdapter);

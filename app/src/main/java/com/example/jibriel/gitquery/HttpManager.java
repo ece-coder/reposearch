@@ -1,6 +1,7 @@
 package com.example.jibriel.gitquery;
 
 import com.example.jibriel.gitquery.models.AutoValueGsonFactory;
+import com.example.jibriel.gitquery.models.Issues;
 import com.example.jibriel.gitquery.models.Repos;
 import com.google.gson.GsonBuilder;
 
@@ -24,7 +25,7 @@ public interface HttpManager {
     //https://api.github.com/search/issues?q=repo:twbs/bootstrap+is:closed
 
     @GET("/search/issues")
-    Observable<Repos> searchIssues(@Query("q") String issues);
+    Observable<Issues> searchIssues(@Query("q") String issues);
 
 
     @GET("/search/repositories")

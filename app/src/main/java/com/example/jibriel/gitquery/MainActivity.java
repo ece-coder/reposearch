@@ -104,11 +104,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void viewSearchResults (List<RepoDetails> repoDetailsList) {
 
-        RepoSearchFragment details = RepoSearchFragment.newInstance();
+        RepoSearchFragment details = RepoSearchFragment.newInstance(mHttpManager);
         RepoSearchFragment.mRepoDetailsList = repoDetailsList;
 
         FragmentTransaction ft = getFragmentManager()
-            .beginTransaction();
+                .beginTransaction();
         ft.replace(R.id.fragFrame, details);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         ft.commit();
